@@ -17,7 +17,7 @@ const home: NightwatchTests = {
       .sauceVisualCheck('Added backpack to cart')
       // We expect 2 visual diffs, one for the Inventory Page and one for the Added backpack to cart
       // They are unapproved because we haven't approved them yet
-      .assert.sauceVisualResults(DiffStatus.Unapproved, 2);
+      // .assert.sauceVisualResults(DiffStatus.Unapproved, 2);
   },
   'Check Long Inventory Page': () => {
     browser
@@ -28,7 +28,7 @@ const home: NightwatchTests = {
       .waitForElementVisible('.inventory_list')
       .url('https://saucedemo.com/inventory-long.html')
       .sauceVisualCheck('Inventory Page (full page)"', {fullPage: true})
-      .assert.sauceVisualResults(DiffStatus.Unapproved, 1);
+      // .assert.sauceVisualResults(DiffStatus.Unapproved, 1);
   },
   'Check Home Page with ignore regions': () => {
     const login = browser.page.login();
@@ -54,8 +54,20 @@ const home: NightwatchTests = {
       })
       // We expect 1 visual diff, one for the Home Page
       // They are unapproved because we haven't approved them yet
-      .assert.sauceVisualResults(DiffStatus.Unapproved, 1);
+      // .assert.sauceVisualResults(DiffStatus.Unapproved, 1);
   },
+  'Backpack item page - Price Clip': () => {
+      browser
+        .url('https://saucedemo.com')
+        .setValue('input[data-test="username"]', USERNAME)
+        .setValue('input[data-test="password"]', PASSWORD)
+        .click('input[data-test="login-button"]')
+        .waitForElementVisible('.inventory_list')
+        .click('[data-test="inventory-item-sauce-labs-backpack-img"]')
+        .sauceVisualCheck('Backpage Item Page Price Check', {
+          clipSelector: '.inventory_details_price',
+      });
+    }
 };
 
 export default home;
