@@ -5,6 +5,7 @@ const USERNAME =
 const PASSWORD = 'secret_sauce';
 
 const home: NightwatchTests = {
+  // Simple test
   'Check Inventory Page': () => {
     browser
       .url('https://saucedemo.com')
@@ -19,6 +20,24 @@ const home: NightwatchTests = {
       // They are unapproved because we haven't approved them yet
       // .assert.sauceVisualResults(DiffStatus.Unapproved, 2);
   },
+  // Simple test
+  'Check Inventory Page with DOM Capture': () => {
+    browser
+      .url('https://saucedemo.com')
+      .setValue('input[data-test="username"]', USERNAME)
+      .setValue('input[data-test="password"]', PASSWORD)
+      .click('input[data-test="login-button"]')
+      .waitForElementVisible('.inventory_list')
+      .sauceVisualCheck('Inventory Page')
+      .click('[data-test="add-to-cart-sauce-labs-backpack"]')
+      .sauceVisualCheck('Added backpack to cart with DOM Capture', {
+        captureDom: true
+      })
+      // We expect 2 visual diffs, one for the Inventory Page and one for the Added backpack to cart
+      // They are unapproved because we haven't approved them yet
+      .assert.sauceVisualResults(DiffStatus.Equal, 2);
+  },
+  // Test that utilizes Full Page Screenshot
   'Check Long Inventory Page': () => {
     browser
       .url('https://saucedemo.com')
@@ -30,6 +49,7 @@ const home: NightwatchTests = {
       .sauceVisualCheck('Inventory Page (full page)"', {fullPage: true})
       // .assert.sauceVisualResults(DiffStatus.Unapproved, 1);
   },
+  // Test that ignores regions
   'Check Home Page with ignore regions': () => {
     const login = browser.page.login();
     login
@@ -56,6 +76,7 @@ const home: NightwatchTests = {
       // They are unapproved because we haven't approved them yet
       // .assert.sauceVisualResults(DiffStatus.Unapproved, 1);
   },
+  // Test that clips to an element
   'Backpack item page - Price Clip': () => {
       browser
         .url('https://saucedemo.com')
@@ -68,6 +89,8 @@ const home: NightwatchTests = {
           clipSelector: '.inventory_details_price',
       });
     }
+
+    // TODO: Env Var for Project
 };
 
 export default home;
