@@ -20,7 +20,7 @@ const home: NightwatchTests = {
       // They are unapproved because we haven't approved them yet
       // .assert.sauceVisualResults(DiffStatus.Unapproved, 2);
   },
-  // Simple test
+  // Simple test w/ Test Results
   'Check Inventory Page with DOM Capture': () => {
     browser
       .url('https://saucedemo.com')
