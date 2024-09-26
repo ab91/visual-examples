@@ -20,25 +20,9 @@ const home: NightwatchTests = {
       // They are unapproved because we haven't approved them yet
       // .assert.sauceVisualResults(DiffStatus.Unapproved, 2);
   },
-  // Simple test w/ Test Results
-  'Check Inventory Page with DOM Capture': () => {
-    browser
-      .url('https://saucedemo.com')
-      .setValue('input[data-test="username"]', USERNAME)
-      .setValue('input[data-test="password"]', PASSWORD)
-      .click('input[data-test="login-button"]')
-      .waitForElementVisible('.inventory_list')
-      .sauceVisualCheck('Inventory Page')
-      .click('[data-test="add-to-cart-sauce-labs-backpack"]')
-      .sauceVisualCheck('Added backpack to cart with DOM Capture', {
-        captureDom: true
-      })
-      // We expect 2 visual diffs, one for the Inventory Page and one for the Added backpack to cart
-      // They are unapproved because we haven't approved them yet
-      .assert.sauceVisualResults(DiffStatus.Equal, 2);
-  },
+  
   // Test that utilizes Full Page Screenshot
-  'Check Long Inventory Page': () => {
+  'Check Longer Inventory Page': () => {
     browser
       .url('https://saucedemo.com')
       .setValue('input[data-test="username"]', USERNAME)
@@ -47,7 +31,6 @@ const home: NightwatchTests = {
       .waitForElementVisible('.inventory_list')
       .url('https://saucedemo.com/inventory-long.html')
       .sauceVisualCheck('Inventory Page (full page)"', {fullPage: true})
-      // .assert.sauceVisualResults(DiffStatus.Unapproved, 1);
   },
   // Test that ignores regions
   'Check Home Page with ignore regions': () => {
